@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "This project basically deals with adding data of users to database and getting those data back.",
   "scripts": {
-    "start": ""
+    "start": "nodemon"
   },
-  "main": "./main.ts",
+  "main": "main.ts",
   "author": "palrohit100@gmail.com",
   "dependencies": {
     "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "typescript": "^4.5.4"
   },
   "devDependencies": {
