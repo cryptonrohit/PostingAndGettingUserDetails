@@ -1,0 +1,22 @@
+{
+  "name": "postingandgettinguserdetails",
+  "version": "1.0.0",
+  "description": "This project basically deals with adding data of users to database and getting those data back.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptonrohit/PostingAndGettingUserDetails.git"
+  },
+  "author": "palrohit100@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptonrohit/PostingAndGettingUserDetails/issues"
+  },
+  "homepage": "https://github.com/cryptonrohit/PostingAndGettingUserDetails#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
