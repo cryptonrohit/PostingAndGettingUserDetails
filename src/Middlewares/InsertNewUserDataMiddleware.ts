@@ -58,7 +58,7 @@ class InsertNewUserDataMiddleware {
 
     validateDateOfBirth(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
-            return { error: `Request parameter ${name} is not in valid format` };
+            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
         }
         return { error: null };
     }

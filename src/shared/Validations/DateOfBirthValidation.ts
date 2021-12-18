@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function dateOfBirthValidation(data: string): boolean {
-    return true;
+    return moment(data, "YYYY/MM/DD", true).isValid() ? true : false;
 }
