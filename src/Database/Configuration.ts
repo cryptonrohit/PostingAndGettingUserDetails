@@ -15,5 +15,9 @@ class DBConfiguration {
         }
         return DBConfiguration.dbInstance;
     }
+
+    async init(){
+        // call table handler;
+    }
 }
 export default DBConfiguration;
