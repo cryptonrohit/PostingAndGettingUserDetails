@@ -19,6 +19,9 @@ import { panFourthCharInclusions } from "../Constants";
  * @returns Boolean. Whether the PAN is valid or not.
  */
 export function panNumberValidation(data: string): boolean {
+    if (!data) {
+        return false;
+    }
     const firstFiveChars = data.substring(0,5);
     const secondFourChars = data.substring(5,9);
     const lastChar = data.substring(9);
