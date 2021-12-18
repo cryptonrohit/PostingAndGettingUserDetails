@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { UserDataModel } from "../Models/UserDataModel";
 import { ValidationStatusModel } from "../Models/ValidationStatusModel";
-import { stringValidation } from "../shared/StringValidation";
-import { undefinedValidation } from "../shared/UndefinedValidation";
+import { dateOfBirthValidation } from "../shared/Validations/DateOfBirthValidation";
+import { panNumberValidation } from "../shared/Validations/PanNumberValidation";
+import { stringValidation } from "../shared/Validations/StringValidation";
+import { undefinedValidation } from "../shared/Validations/UndefinedValidation";
 
 // Not using "validator" package for validating the request parameters as that is what is been told according to the test.
 // Instead used native way of validating.
@@ -24,7 +26,13 @@ class InsertNewUserDataMiddleware {
             switch (name) {
                 case UserDataModel.FirstName:
                     validationStatus = this.validateFirstName(name, value as string);  
-                    break;            
+                    break;  
+                case UserDataModel.PanNumber:
+                    validationStatus = this.validatePanNumber(name, value as string);  
+                    break;
+                case UserDataModel.DateOfBirth:
+                    validationStatus = this.validateDateOfBirth(name, value as string);  
+                    break;                
                 default:
                     break;
             }
@@ -37,6 +45,20 @@ class InsertNewUserDataMiddleware {
     validateFirstName(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !stringValidation(value)) {
             return { error: `Request parameter ${name} is not a valid string` };
+        }
+        return { error: null };
+    }
+
+    validatePanNumber(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !panNumberValidation(value)) {
+            return { error: `Request parameter ${name} is not a valid` };
+        }
+        return { error: null };
+    }
+
+    validateDateOfBirth(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
+            return { error: `Request parameter ${name} is not in valid format` };
         }
         return { error: null };
     }
