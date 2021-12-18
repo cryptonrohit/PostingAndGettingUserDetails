@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import insertNewUserData from "../Database/Entities/Command/InsertNewUserData";
+import getUserData from "../Database/Entities/Query/GetUserData";
 import { GenderModel } from "../Models/GenderModel";
 import UserDataModel from "../Models/UserDataRequestModel";
 import { getHttpStatusCodeAndMessage } from "../shared/GetHttpStatusCodesAndMessages";
@@ -16,6 +17,10 @@ class UserDetailsController {
         const dbResponse = await insertNewUserData.execute(userData);
         const {statusCode, outputData} = getHttpStatusCodeAndMessage(dbResponse);
         res.status(statusCode).send(outputData);
+    }
+
+    async getUserData(req: Request, res: Response) {
+        const result = await getUserData.execute();
     }
 }
 const userDetailsController = new UserDetailsController();
