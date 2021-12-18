@@ -1,3 +1,5 @@
+import { genders } from "../Constants";
+
 /**
  * 
  * @param data gender of the user
@@ -5,6 +7,5 @@
  */
 export function genderValidation(data: string): boolean {
     const reqGender = data.toLowerCase();
-    const genders = ["male", "female", "transgender"];
     return genders.includes(reqGender) ? true : false;
 }

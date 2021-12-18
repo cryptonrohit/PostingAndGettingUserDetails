@@ -7,6 +7,7 @@ import { genderValidation } from "../shared/Validations/GenderValidation";
 import { panNumberValidation } from "../shared/Validations/PanNumberValidation";
 import { stringValidation } from "../shared/Validations/StringValidation";
 import { undefinedValidation } from "../shared/Validations/UndefinedValidation";
+import { URLValidation } from "../shared/Validations/URLValidation";
 
 // Not using "validator" package for validating the request parameters as that is what is been told according to the test.
 // Instead used native way of validating.
@@ -40,7 +41,10 @@ class InsertNewUserDataMiddleware {
                     break;
                 case UserDataModel.Email:
                     validationStatus = this.validateEmail(name, value as string);  
-                    break;                      
+                    break;     
+                case UserDataModel.ProfileImage:
+                    validationStatus = this.validateImage(name, value as string);  
+                    break;                       
                 default:
                     break;
             }
@@ -81,6 +85,13 @@ class InsertNewUserDataMiddleware {
     validateEmail(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !emailValidation(value)) {
             return { error: `Request parameter ${name} is not valid email. Please enter valid email` };
+        }
+        return { error: null };
+    }
+
+    validateImage(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !URLValidation(value)) {
+            return { error: `Request parameter ${name} is not valid url. Please enter valid url` };
         }
         return { error: null };
     }

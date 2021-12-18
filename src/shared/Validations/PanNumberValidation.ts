@@ -1,3 +1,5 @@
+import { panFourthCharInclusions } from "../Constants";
+
 /**
  * 
  * @param data The Pan Number of the user
@@ -46,8 +48,7 @@ function firstFiveCharValidation(firstFiveChars: string): boolean {
 }
 
 function fourthCharValidation(fourthCharacter: string): boolean {
-    const fouthCharInclusion = ["C","P","H","F","A","T","B","L","J","G"];
-    return fouthCharInclusion.includes(fourthCharacter) ? true : false;
+    return panFourthCharInclusions.includes(fourthCharacter) ? true : false;
 }
 
 function secondFourCharValidation(secondFourChars: string) {
