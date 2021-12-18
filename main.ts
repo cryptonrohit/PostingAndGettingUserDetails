@@ -1,6 +1,8 @@
 import express from "express";
-import userDetailsController from "./src/Controllers/UserDetailsController";
+import bodyParser from "body-parser";
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 const port =  3456;
 
 app.listen(port, () => {
@@ -9,6 +11,9 @@ app.listen(port, () => {
 
 import db from "./src/Database/Configuration";
 import insertNewUserDataMiddleware from "./src/Middlewares/InsertNewUserDataMiddleware";
+import userCredentialsMiddleware from "./src/Middlewares/UserCredentialsMiddleware";
+import userAuthenticationController from "./src/Controllers/UserAuthenticationController";
+import userDetailsController from "./src/Controllers/UserDetailsController";
 
 async function main() {
     try {
@@ -20,5 +25,6 @@ async function main() {
 }
 app.post("/userData", insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
 app.get("/userData", userDetailsController.getUserData);
+app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 
 main();

@@ -15,12 +15,12 @@ import { URLValidation } from "../shared/Validations/URLValidation";
 class InsertNewUserDataMiddleware {
     validate(req: Request, res: Response, next: NextFunction) {
         const requestArray = [
-            {name: "firstName", value: req.query.firstName},
-            {name: "panNumber", value: req.query.panNumber},
-            {name: "dateOfBirth", value: req.query.dateOfBirth},
-            {name: "gender", value: req.query.gender},
-            {name: "email", value: req.query.email},
-            {name: "profileImage", value: req.query.profileImage},
+            {name: "firstName", value: req.body.firstName},
+            {name: "panNumber", value: req.body.panNumber},
+            {name: "dateOfBirth", value: req.body.dateOfBirth},
+            {name: "gender", value: req.body.gender},
+            {name: "email", value: req.body.email},
+            {name: "profileImage", value: req.body.profileImage},
         ]
 
         let validationStatus: ValidationStatusModel
