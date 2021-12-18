@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { UserDataModel } from "../Models/UserDataModel";
 import { ValidationStatusModel } from "../Models/ValidationStatusModel";
 import { dateOfBirthValidation } from "../shared/Validations/DateOfBirthValidation";
+import { emailValidation } from "../shared/Validations/EmailValidation";
+import { genderValidation } from "../shared/Validations/GenderValidation";
 import { panNumberValidation } from "../shared/Validations/PanNumberValidation";
 import { stringValidation } from "../shared/Validations/StringValidation";
 import { undefinedValidation } from "../shared/Validations/UndefinedValidation";
@@ -32,7 +34,13 @@ class InsertNewUserDataMiddleware {
                     break;
                 case UserDataModel.DateOfBirth:
                     validationStatus = this.validateDateOfBirth(name, value as string);  
-                    break;                
+                    break;
+                case UserDataModel.Gender:
+                    validationStatus = this.validateGender(name, value as string);  
+                    break;
+                case UserDataModel.Email:
+                    validationStatus = this.validateEmail(name, value as string);  
+                    break;                      
                 default:
                     break;
             }
@@ -62,6 +70,21 @@ class InsertNewUserDataMiddleware {
         }
         return { error: null };
     }
+
+    validateGender(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !genderValidation(value)) {
+            return { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
+        }
+        return { error: null };
+    }
+
+    validateEmail(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !emailValidation(value)) {
+            return { error: `Request parameter ${name} is not valid email. Please enter valid email` };
+        }
+        return { error: null };
+    }
+    
 }
 const insertNewUserDataMiddleware = new InsertNewUserDataMiddleware();
 export default insertNewUserDataMiddleware;
