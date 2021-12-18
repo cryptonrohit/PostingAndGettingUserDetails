@@ -14,13 +14,15 @@ class UserDetailsController {
             req.query.gender as GenderModel, 
             req.query.email as string, 
             req.query.profileImage as string);
-        const dbResponse = await insertNewUserData.execute(userData);
-        const {statusCode, outputData} = getHttpStatusCodeAndMessage(dbResponse);
+        const result = await insertNewUserData.execute(userData);
+        const {statusCode, outputData} = getHttpStatusCodeAndMessage(result);
         res.status(statusCode).send(outputData);
     }
 
     async getUserData(req: Request, res: Response) {
         const result = await getUserData.execute();
+        const {statusCode} = getHttpStatusCodeAndMessage(result.operation);
+        res.status(statusCode).send(result.data);
     }
 }
 const userDetailsController = new UserDetailsController();
