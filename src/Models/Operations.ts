@@ -1,5 +1,7 @@
 export enum Operation {
     Error = "Error",
     Created = "Created",
-    AlreadyExists = "AlreadyExists"
+    AlreadyExists = "AlreadyExists",
+    NoDataFound = "NoDataFound",
+    Success = "Success"
 }
