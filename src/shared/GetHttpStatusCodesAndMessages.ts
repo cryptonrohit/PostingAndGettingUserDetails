@@ -1,6 +1,6 @@
 import { Operation } from "../Models/Operations";
 
-export function getHttpStatusCodeAndMessage(operation: Operation) {
+export function getHttpStatusData(operation: Operation) {
     switch (operation) {
         case Operation.NoDataFound:
             return {statusCode: 404, outputData: "No data available"}; 

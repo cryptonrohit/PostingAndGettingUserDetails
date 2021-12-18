@@ -3,7 +3,7 @@ import insertNewUserData from "../Database/Entities/Command/InsertNewUserData";
 import getUserData from "../Database/Entities/Query/GetUserData";
 import { GenderModel } from "../Models/GenderModel";
 import UserDataModel from "../Models/UserDataRequestModel";
-import { getHttpStatusCodeAndMessage } from "../shared/GetHttpStatusCodesAndMessages";
+import { getHttpStatusData } from "../shared/GetHttpStatusCodesAndMessages";
 
 class UserDetailsController {
     async insertUserdata(req: Request, res: Response) {
@@ -15,13 +15,13 @@ class UserDetailsController {
             req.query.email as string, 
             req.query.profileImage as string);
         const result = await insertNewUserData.execute(userData);
-        const {statusCode, outputData} = getHttpStatusCodeAndMessage(result);
+        const {statusCode, outputData} = getHttpStatusData(result);
         res.status(statusCode).send(outputData);
     }
 
     async getUserData(req: Request, res: Response) {
         const result = await getUserData.execute();
-        const {statusCode} = getHttpStatusCodeAndMessage(result.operation);
+        const {statusCode} = getHttpStatusData(result.operation);
         res.status(statusCode).send(result.data);
     }
 }
