@@ -1,6 +1,5 @@
 import { Knex } from "knex";
 import userDataTable from "./TableCreation/UserDataTable";
-import userData from "./TableCreation/UserDataTable";
 import { USER_DATA } from "./TableNames/TableNames";
 
 class DBTableHandler {
