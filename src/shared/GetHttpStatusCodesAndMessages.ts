@@ -7,7 +7,7 @@ export function getHttpStatusData(operation: Operation) {
         case Operation.Success:
             return {statusCode: 200, outputData: "All good"};     
         case Operation.AlreadyExists:
-            return {statusCode: 409, outputData: "AlreadyExists"};
+            return {statusCode: 409, outputData: "AlreadyExists with same PAN number"};
         case Operation.Created:
             return {statusCode: 201, outputData: "Created"};
         case Operation.Error:

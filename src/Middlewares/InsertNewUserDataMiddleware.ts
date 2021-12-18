@@ -25,77 +25,57 @@ class InsertNewUserDataMiddleware {
 
         let validationStatus: ValidationStatusModel
 
-        for(const {name, value} of requestArray) {
+        for(let {name, value} of requestArray) {
+            value = value as string;
             switch (name) {
                 case UserEnumData.FirstName:
-                    validationStatus = this.validateFirstName(name, value as string);  
-                    break;  
+                    if( !undefinedValidation(value) && !stringValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not a valid string` };
+                    }
+                    validationStatus = { error: null };  
+                    break;
                 case UserEnumData.PanNumber:
-                    validationStatus = this.validatePanNumber(name, value as string);  
+                    if( !undefinedValidation(value) && !panNumberValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not a valid` };
+                    }
+                    validationStatus = { error: null }; 
                     break;
                 case UserEnumData.DateOfBirth:
-                    validationStatus = this.validateDateOfBirth(name, value as string);  
+                    if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
+                    }
+                    validationStatus = { error: null };  
                     break;
                 case UserEnumData.Gender:
-                    validationStatus = this.validateGender(name, value as string);  
+                    if( !undefinedValidation(value) && !genderValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
+                    }
+                    validationStatus = { error: null };  
                     break;
                 case UserEnumData.Email:
-                    validationStatus = this.validateEmail(name, value as string);  
+                    if( !undefinedValidation(value) && !emailValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not valid email. Please enter valid email` };
+                    }
+                    validationStatus = { error: null };
                     break;     
                 case UserEnumData.ProfileImage:
-                    validationStatus = this.validateImage(name, value as string);  
+                    if( !undefinedValidation(value) && !URLValidation(value)) {
+                        validationStatus = { error: `Request parameter ${name} is not valid url. Please enter valid url` };
+                    }
+                    validationStatus = { error: null };
                     break;                       
                 default:
+                    validationStatus = { error: `Parameter ${name} is not valid` };
                     break;
             }
+            if (validationStatus.error) {
+                res.status(400);
+                res.send(validationStatus);
+                return;
+            }
         }
-
-
         next();
-    }
-
-    validateFirstName(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !stringValidation(value)) {
-            return { error: `Request parameter ${name} is not a valid string` };
-        }
-        return { error: null };
-    }
-
-    validatePanNumber(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !panNumberValidation(value)) {
-            return { error: `Request parameter ${name} is not a valid` };
-        }
-        return { error: null };
-    }
-
-    validateDateOfBirth(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
-            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
-        }
-        return { error: null };
-    }
-
-    validateGender(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !genderValidation(value)) {
-            return { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
-        }
-        return { error: null };
-    }
-
-    validateEmail(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !emailValidation(value)) {
-            return { error: `Request parameter ${name} is not valid email. Please enter valid email` };
-        }
-        return { error: null };
-    }
-
-    validateImage(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !URLValidation(value)) {
-            return { error: `Request parameter ${name} is not valid url. Please enter valid url` };
-        }
-        return { error: null };
-    }
-    
+    }    
 }
 const insertNewUserDataMiddleware = new InsertNewUserDataMiddleware();
 export default insertNewUserDataMiddleware;
