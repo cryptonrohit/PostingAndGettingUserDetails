@@ -63,42 +63,42 @@ class InsertNewUserDataMiddleware {
 
     static validateFirstName(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !stringValidation(value)) {
-            return { error: `Request parameter ${name} is not a valid string` };
+            return { error: `Request parameter ${name} is either undefined or an invalid string` };
         }
         return { error: null };
     }
 
     static validatePanNumber(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !panNumberValidation(value)) {
-            return { error: `Request parameter ${name} is not a valid` };
+            return { error: `Request parameter ${name} is either undefined or invalid` };
         }
         return { error: null };
     }
 
     static validateDateOfBirth(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
-            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
+            return { error: `Request parameter ${name} is either undefined or not in valid date format: YYYY/MM/DD` };
         }
         return { error: null };
     }
 
     static validateGender(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !genderValidation(value)) {
-            return { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
+            return { error: `Request parameter ${name} is either undefined or not valid gender. Please select male/female/transgender` };
         }
         return { error: null };
     }
 
     static validateEmail(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !emailValidation(value)) {
-            return { error: `Request parameter ${name} is not valid email. Please enter valid email` };
+            return { error: `Request parameter ${name} is either undefined or not valid email` };
         }
         return { error: null };
     }
 
     static validateImage(name: string, value: string): ValidationStatusModel {
         if( !undefinedValidation(value) && !URLValidation(value)) {
-            return { error: `Request parameter ${name} is not valid url. Please enter valid url` };
+            return { error: `Request parameter ${name} is either undefined or not valid url` };
         }
         return { error: null };
     }
