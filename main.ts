@@ -19,8 +19,6 @@ async function main() {
     }
 }
 app.post("/userData", insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
-app.get("/", (req, res) => {
-    res.send("Hello there. rohit");
-})
+app.get("/userData", userDetailsController.getUserData);
 
 main();
