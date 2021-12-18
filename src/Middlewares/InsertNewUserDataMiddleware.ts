@@ -29,40 +29,22 @@ class InsertNewUserDataMiddleware {
             value = value as string;
             switch (name) {
                 case UserEnumData.FirstName:
-                    if( !undefinedValidation(value) && !stringValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not a valid string` };
-                    }
-                    validationStatus = { error: null };  
-                    break;
+                    validationStatus = InsertNewUserDataMiddleware.validateFirstName(name, value);  
+                    break;  
                 case UserEnumData.PanNumber:
-                    if( !undefinedValidation(value) && !panNumberValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not a valid` };
-                    }
-                    validationStatus = { error: null }; 
+                    validationStatus = InsertNewUserDataMiddleware.validatePanNumber(name, value);  
                     break;
                 case UserEnumData.DateOfBirth:
-                    if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
-                    }
-                    validationStatus = { error: null };  
+                    validationStatus = InsertNewUserDataMiddleware.validateDateOfBirth(name, value);  
                     break;
                 case UserEnumData.Gender:
-                    if( !undefinedValidation(value) && !genderValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
-                    }
-                    validationStatus = { error: null };  
+                    validationStatus = InsertNewUserDataMiddleware.validateGender(name, value);  
                     break;
                 case UserEnumData.Email:
-                    if( !undefinedValidation(value) && !emailValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not valid email. Please enter valid email` };
-                    }
-                    validationStatus = { error: null };
+                    validationStatus = InsertNewUserDataMiddleware.validateEmail(name, value);  
                     break;     
                 case UserEnumData.ProfileImage:
-                    if( !undefinedValidation(value) && !URLValidation(value)) {
-                        validationStatus = { error: `Request parameter ${name} is not valid url. Please enter valid url` };
-                    }
-                    validationStatus = { error: null };
+                    validationStatus = InsertNewUserDataMiddleware.validateImage(name, value);  
                     break;                       
                 default:
                     validationStatus = { error: `Parameter ${name} is not valid` };
@@ -74,8 +56,53 @@ class InsertNewUserDataMiddleware {
                 return;
             }
         }
+
+
         next();
-    }    
+    }
+
+    static validateFirstName(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !stringValidation(value)) {
+            return { error: `Request parameter ${name} is not a valid string` };
+        }
+        return { error: null };
+    }
+
+    static validatePanNumber(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !panNumberValidation(value)) {
+            return { error: `Request parameter ${name} is not a valid` };
+        }
+        return { error: null };
+    }
+
+    static validateDateOfBirth(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
+            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
+        }
+        return { error: null };
+    }
+
+    static validateGender(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !genderValidation(value)) {
+            return { error: `Request parameter ${name} is not valid gender. Please select either male/female/transgender` };
+        }
+        return { error: null };
+    }
+
+    static validateEmail(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !emailValidation(value)) {
+            return { error: `Request parameter ${name} is not valid email. Please enter valid email` };
+        }
+        return { error: null };
+    }
+
+    static validateImage(name: string, value: string): ValidationStatusModel {
+        if( !undefinedValidation(value) && !URLValidation(value)) {
+            return { error: `Request parameter ${name} is not valid url. Please enter valid url` };
+        }
+        return { error: null };
+    }
+    
 }
 const insertNewUserDataMiddleware = new InsertNewUserDataMiddleware();
 export default insertNewUserDataMiddleware;
