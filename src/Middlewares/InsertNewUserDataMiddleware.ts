@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { UserDataModel } from "../Models/UserDataModel";
+import { UserEnumData } from "../Models/UserEnumData";
 import { ValidationStatusModel } from "../Models/ValidationStatusModel";
 import { dateOfBirthValidation } from "../shared/Validations/DateOfBirthValidation";
 import { emailValidation } from "../shared/Validations/EmailValidation";
@@ -27,22 +27,22 @@ class InsertNewUserDataMiddleware {
 
         for(const {name, value} of requestArray) {
             switch (name) {
-                case UserDataModel.FirstName:
+                case UserEnumData.FirstName:
                     validationStatus = this.validateFirstName(name, value as string);  
                     break;  
-                case UserDataModel.PanNumber:
+                case UserEnumData.PanNumber:
                     validationStatus = this.validatePanNumber(name, value as string);  
                     break;
-                case UserDataModel.DateOfBirth:
+                case UserEnumData.DateOfBirth:
                     validationStatus = this.validateDateOfBirth(name, value as string);  
                     break;
-                case UserDataModel.Gender:
+                case UserEnumData.Gender:
                     validationStatus = this.validateGender(name, value as string);  
                     break;
-                case UserDataModel.Email:
+                case UserEnumData.Email:
                     validationStatus = this.validateEmail(name, value as string);  
                     break;     
-                case UserDataModel.ProfileImage:
+                case UserEnumData.ProfileImage:
                     validationStatus = this.validateImage(name, value as string);  
                     break;                       
                 default:

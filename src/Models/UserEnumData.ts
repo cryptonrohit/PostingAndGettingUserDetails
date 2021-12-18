@@ -1,4 +1,4 @@
-export enum UserDataModel {
+export enum UserEnumData {
     FirstName = "firstName",
     PanNumber = "panNumber",
     DateOfBirth = "dateOfBirth",
