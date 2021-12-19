@@ -14,6 +14,7 @@ import insertNewUserDataMiddleware from "./src/Middlewares/InsertNewUserDataMidd
 import userCredentialsMiddleware from "./src/Middlewares/UserCredentialsMiddleware";
 import userAuthenticationController from "./src/Controllers/UserAuthenticationController";
 import userDetailsController from "./src/Controllers/UserDetailsController";
+import userAuthenticationMiddleware from "./src/Middlewares/UserAuthenticationMiddleware";
 
 async function main() {
     try {
@@ -23,8 +24,8 @@ async function main() {
         console.error("Issue getting DB up", error);
     }
 }
-app.post("/userData", insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
-app.get("/userData", userDetailsController.getUserData);
+app.post("/userData", userAuthenticationMiddleware.authenticate, insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
+app.get("/userData", userAuthenticationMiddleware.authenticate, userDetailsController.getUserData);
 app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 
 main();
