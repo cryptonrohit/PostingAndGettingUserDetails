@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-const port = 80;
+const port = process.env.PORT || 80;
 
 app.listen(port, () => {
     console.log(`listening on port ${port}......`);
