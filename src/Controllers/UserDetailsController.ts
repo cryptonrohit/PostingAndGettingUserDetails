@@ -15,7 +15,7 @@ class UserDetailsController {
             req.body.gender as GenderModel, 
             req.body.email as string, 
             req.body.profileImage as string);
-
+        userData.panNumber = userData.panNumber.toUpperCase();
         const result = await insertNewUserData.execute(userData);
         const {statusCode, outputData} = getHttpStatusData(result);
         res.status(statusCode).send(outputData);
