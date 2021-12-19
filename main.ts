@@ -25,7 +25,8 @@ async function main() {
     }
 }
 app.post("/userData", userAuthenticationMiddleware.authenticate, insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
-app.get("/userData", userAuthenticationMiddleware.authenticate, userDetailsController.getUserData);
+app.get("/userData", userAuthenticationMiddleware.authenticate, userDetailsController.getAllUserData);
+app.get("/userData/:panNumber", userDetailsController.getUserDataByPAN);
 app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 
 main();

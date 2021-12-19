@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import insertNewUserData from "../Database/Entities/Command/InsertNewUserData";
-import getUserData from "../Database/Entities/Query/GetUserData";
+import getAllUserData from "../Database/Entities/Query/GetAllUserData";
+import getUserDataByPAN from "../Database/Entities/Query/GetUserDataByPAN";
 import { GenderModel } from "../Models/GenderModel";
 import UserDataModel from "../Models/UserDataRequestModel";
 import { getHttpStatusData } from "../shared/GetHttpStatusCodesAndMessages";
@@ -20,8 +21,14 @@ class UserDetailsController {
         res.status(statusCode).send(outputData);
     }
 
-    async getUserData(req: Request, res: Response) {
-        const result = await getUserData.execute();
+    async getAllUserData(req: Request, res: Response) {
+        const result = await getAllUserData.execute();
+        const {statusCode} = getHttpStatusData(result.operation);
+        res.status(statusCode).send(result.data);
+    }
+
+    async getUserDataByPAN(req: Request, res: Response) {
+        const result = await getUserDataByPAN.execute(req.params.panNumber);
         const {statusCode} = getHttpStatusData(result.operation);
         res.status(statusCode).send(result.data);
     }
