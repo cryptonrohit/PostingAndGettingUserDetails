@@ -86,7 +86,7 @@ class InsertNewUserDataMiddleware {
             return { error: `Request parameter ${name} is undefined.` }
         }
         if(!dateOfBirthValidation(value)) {
-            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
+            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD. 1. year should be between 1900-2099. 2. month should be between 01-12. 2. day should be between 01-31` };
         }
         return { error: null };
     }
