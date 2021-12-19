@@ -15,6 +15,7 @@ import userCredentialsMiddleware from "./src/Middlewares/UserCredentialsMiddlewa
 import userAuthenticationController from "./src/Controllers/UserAuthenticationController";
 import userDetailsController from "./src/Controllers/UserDetailsController";
 import userAuthenticationMiddleware from "./src/Middlewares/UserAuthenticationMiddleware";
+import getUserDataByPANMiddleware from "./src/Middlewares/GetUserDataByPANMiddleware";
 
 async function main() {
     try {
@@ -26,7 +27,7 @@ async function main() {
 }
 app.post("/userData", userAuthenticationMiddleware.authenticate, insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
 app.get("/userData", userAuthenticationMiddleware.authenticate, userDetailsController.getAllUserData);
-app.get("/userData/:panNumber", userDetailsController.getUserDataByPAN);
+app.get("/userData/:panNumber", userAuthenticationMiddleware.authenticate, getUserDataByPANMiddleware.validate, userDetailsController.getUserDataByPAN);
 app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 
 main();
