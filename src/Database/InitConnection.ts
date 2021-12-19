@@ -5,11 +5,10 @@ class DBInitConnection {
         const configData = {
             client: "pg",
             connection: {
-                host: "localhost",
-                user: "postgres",
-                password: "crypton10",
-                database: "postgres",
-                port: 5432
+                connectionString: process.env.DATABASE_URL,
+                ssl: {
+                    rejectUnauthorized: false
+                }
             }
         }
         return Knex(configData);
