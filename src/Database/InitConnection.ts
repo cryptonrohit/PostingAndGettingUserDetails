@@ -5,10 +5,12 @@ class DBInitConnection {
         const configData = {
             client: "pg",
             connection: {
-                connectionString: "postgresql-angular-49699",
-                ssl: {
-                    rejectUnauthorized: false
-                }
+                host: "ec2-3-211-228-251.compute-1.amazonaws.com",
+                user: "vnymsmpnkbkday",
+                password: "3702f50b1d98bfccb26583d12ca58f46d9e47abf4a56513aac26fc736c85abf9",
+                database: "dbns5arne9ma1l",
+                port: 5432,
+                ssl: false
             }
         }
         return Knex(configData);
