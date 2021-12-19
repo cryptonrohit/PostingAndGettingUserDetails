@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { USER_DATA } from "../TableNames/tableNames";
+import { USER_DATA } from "../TableNames/TableNames";
 
 class UserDataTable {
     async create(dbConnector: Knex) {
