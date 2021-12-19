@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This project basically deals with adding data of users to database and getting those data back.",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon main.ts"
   },
   "main": "main.ts",
   "author": "palrohit100@gmail.com",
