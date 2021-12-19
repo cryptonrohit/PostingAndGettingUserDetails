@@ -10,9 +10,6 @@
  * @returns boolean. Whether email id is valid or not.
  */
 export function emailValidation(data: string): boolean {
-    if (!data) {
-        return false;
-    }
     const emailRegex = /^\w+@[a-zA-Z_]+\.[a-zA-Z]{2,3}$/g;
     return data.match(emailRegex) ? true : false;
 }

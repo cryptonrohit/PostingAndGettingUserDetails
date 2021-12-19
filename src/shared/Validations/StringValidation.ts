@@ -4,6 +4,9 @@
  * @returns boolean. Whether the data entered by user is valid string or not.
  */
 export function stringValidation(strValue: string): boolean {
+    if (!strValue) {
+        return false;
+    }
     if(typeof(strValue) !== "string"){
         return false;
     }
