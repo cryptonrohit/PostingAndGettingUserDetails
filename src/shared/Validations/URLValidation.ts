@@ -5,9 +5,10 @@ import { protocols } from "../Constants";
  * @returns boolean. Whether the image url is valid or not.
  */
 export function URLValidation(data: string): boolean {
-    if (!data) {
+    try {
+        const urldata = new URL(data);
+        return protocols.includes(urldata.protocol) ? true : false;
+    } catch (error) {
         return false;
     }
-    const urldata = new URL(data);
-    return protocols.includes(urldata.protocol) ? true : false;
 }
