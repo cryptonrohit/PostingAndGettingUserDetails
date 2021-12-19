@@ -8,12 +8,13 @@ import { getHttpStatusData } from "../shared/GetHttpStatusCodesAndMessages";
 class UserDetailsController {
     async insertUserdata(req: Request, res: Response) {
         const userData = new UserDataModel
-           (req.query.firstName as string, 
-            req.query.panNumber as string, 
-            req.query.dateOfBirth as unknown as Date, 
-            req.query.gender as GenderModel, 
-            req.query.email as string, 
-            req.query.profileImage as string);
+           (req.body.firstName as string, 
+            req.body.panNumber as string, 
+            req.body.dateOfBirth as unknown as Date, 
+            req.body.gender as GenderModel, 
+            req.body.email as string, 
+            req.body.profileImage as string);
+
         const result = await insertNewUserData.execute(userData);
         const {statusCode, outputData} = getHttpStatusData(result);
         res.status(statusCode).send(outputData);
