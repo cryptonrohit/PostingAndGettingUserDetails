@@ -25,9 +25,9 @@ async function main() {
         console.error("Issue getting DB up", error);
     }
 }
+app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 app.post("/userData", userAuthenticationMiddleware.authenticate, insertNewUserDataMiddleware.validate, userDetailsController.insertUserdata);
 app.get("/userData", userAuthenticationMiddleware.authenticate, userDetailsController.getAllUserData);
 app.get("/userData/:panNumber", userAuthenticationMiddleware.authenticate, getUserDataByPANMiddleware.validate, userDetailsController.getUserDataByPAN);
-app.get("/tokenid", userCredentialsMiddleware.validate, userAuthenticationController.createToken);
 
 main();
