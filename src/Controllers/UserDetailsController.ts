@@ -28,7 +28,8 @@ class UserDetailsController {
     }
 
     async getUserDataByPAN(req: Request, res: Response) {
-        const result = await getUserDataByPAN.execute(req.params.panNumber);
+        const panNumber = (req.params.panNumber).toUpperCase();
+        const result = await getUserDataByPAN.execute(panNumber);
         const {statusCode} = getHttpStatusData(result.operation);
         res.status(statusCode).send(result.data);
     }
