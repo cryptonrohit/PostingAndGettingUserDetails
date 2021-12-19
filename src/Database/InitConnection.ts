@@ -5,7 +5,7 @@ class DBInitConnection {
         const configData = {
             client: "pg",
             connection: {
-                connectionString: process.env.DATABASE_URL,
+                connectionString: "postgresql-angular-49699",
                 ssl: {
                     rejectUnauthorized: false
                 }
