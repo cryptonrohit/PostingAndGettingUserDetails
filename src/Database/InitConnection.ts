@@ -10,7 +10,7 @@ class DBInitConnection {
                 password: "3702f50b1d98bfccb26583d12ca58f46d9e47abf4a56513aac26fc736c85abf9",
                 database: "dbns5arne9ma1l",
                 port: 5432,
-                ssl: false
+                ssl: { rejectUnauthorized: false }
             }
         }
         return Knex(configData);
