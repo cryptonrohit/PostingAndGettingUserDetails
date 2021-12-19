@@ -1,7 +1,7 @@
 import { GetUserDataResponseModel } from "../../../Models/GetUserDataResponseModel";
 import { Operation } from "../../../Models/Operations";
 import db from "../../Configuration";
-import { USER_DATA } from "../../TableNames/tableNames";
+import { USER_DATA } from "../../TableNames/TableNames";
 
 class GetUserDataByPAN {
     async execute(panNumber: string): Promise<GetUserDataResponseModel> {

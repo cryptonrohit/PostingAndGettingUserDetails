@@ -1,7 +1,7 @@
 import { Operation } from "../../../Models/Operations";
 import UserDataModel from "../../../Models/UserDataRequestModel";
 import db from "../../Configuration";
-import { USER_DATA } from "../../TableNames/tableNames";
+import { USER_DATA } from "../../TableNames/TableNames";
 
 class InsertNewUserData {
     async execute(userData: UserDataModel): Promise<Operation> {
