@@ -62,43 +62,61 @@ class InsertNewUserDataMiddleware {
     }
 
     static validateFirstName(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !stringValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or an invalid string` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!stringValidation(value)) {
+            return { error: `Request parameter ${name} is not a valid string.` };
         }
         return { error: null };
     }
 
     static validatePanNumber(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !panNumberValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or invalid` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!panNumberValidation(value)) {
+            return { error: `Request parameter ${name} is not a valid pan number. 1. It should be 10 digit 2. The first 5 characters are letters, then next 4 are numbers and last is a letter. 3. Fourth character is either of ["C","P","H","F","A","T","B","L","J","G"]` };
         }
         return { error: null };
     }
 
     static validateDateOfBirth(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !dateOfBirthValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or not in valid date format: YYYY/MM/DD` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!dateOfBirthValidation(value)) {
+            return { error: `Request parameter ${name} is not in valid date format: YYYY/MM/DD` };
         }
         return { error: null };
     }
 
     static validateGender(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !genderValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or not valid gender. Please select male/female/transgender` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!genderValidation(value)) {
+            return { error: `Request parameter ${name} is not valid gender. Please select male/female/transgender` };
         }
         return { error: null };
     }
 
     static validateEmail(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !emailValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or not valid email` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!emailValidation(value)) {
+            return { error: `Request parameter ${name} is not valid email` };
         }
         return { error: null };
     }
 
     static validateImage(name: string, value: string): ValidationStatusModel {
-        if( !undefinedValidation(value) && !URLValidation(value)) {
-            return { error: `Request parameter ${name} is either undefined or not valid url` };
+        if(!undefinedValidation(value)) {
+            return { error: `Request parameter ${name} is undefined.` }
+        }
+        if(!URLValidation(value)) {
+            return { error: `Request parameter ${name} is not valid url` };
         }
         return { error: null };
     }
