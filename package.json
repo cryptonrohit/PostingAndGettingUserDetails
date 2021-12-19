@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "This project basically deals with adding data of users to database and getting those data back.",
   "scripts": {
-    "start": "nodemon"
+    "start": "npm run build && nodemon",
+    "build": "npm run build-ts",
+    "build-ts": "tsc"
   },
   "main": "./main.ts",
   "author": "palrohit100@gmail.com",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/jsonwebtoken": "^8.5.6"
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/node": "^17.0.0"
   }
 }

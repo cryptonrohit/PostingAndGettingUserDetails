@@ -3,7 +3,8 @@
         "target": "ES6",
         "module": "CommonJS",
         "esModuleInterop": true,
-        "allowJs": false
+        "allowJs": false,
+        "outDir": "./build"
     },
     "exclude": ["node_modules"]
 }
