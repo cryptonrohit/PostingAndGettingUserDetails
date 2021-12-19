@@ -19,7 +19,8 @@ import { panFourthCharInclusions } from "../Constants";
  * @returns Boolean. Whether the PAN is valid or not.
  */
 export function panNumberValidation(data: string): boolean {
-    if (!data) {
+    // Length of PAN number sould be 10
+    if (data.length !== 10) {
         return false;
     }
     const firstFiveChars = data.substring(0,5);
@@ -29,10 +30,16 @@ export function panNumberValidation(data: string): boolean {
 }
 
 function validation(firstFiveChars: string, fourthChar: string, secondFourChars: string, lastChar: string): boolean {
-    if (!firstFiveCharValidation(firstFiveChars) 
-    && !fourthCharValidation(fourthChar)
-    && !secondFourCharValidation(secondFourChars)
-    && !lastChar.match(/[a-zA-Z]/g)) {
+    if(!firstFiveCharValidation(firstFiveChars)) {
+        return false;
+    }
+    if(!fourthCharValidation(fourthChar)) {
+        return false;
+    }
+    if(!secondFourCharValidation(secondFourChars)) {
+        return false;
+    }
+    if(!lastChar.match(/[a-zA-Z]/g)) {
         return false;
     }
     return true;
@@ -43,7 +50,8 @@ function firstFiveCharValidation(firstFiveChars: string): boolean {
     let returnValue: boolean;
     for(let i=0; i<firstFiveChars.length; i++) {
         if(!(firstFiveChars.charAt(i).match(regex))) {
-            return returnValue = false;
+            returnValue = false;
+            return returnValue;
         }
         returnValue = true;
     }
@@ -51,6 +59,7 @@ function firstFiveCharValidation(firstFiveChars: string): boolean {
 }
 
 function fourthCharValidation(fourthCharacter: string): boolean {
+    fourthCharacter = fourthCharacter.toUpperCase();
     return panFourthCharInclusions.includes(fourthCharacter) ? true : false;
 }
 
@@ -59,7 +68,8 @@ function secondFourCharValidation(secondFourChars: string) {
     let returnValue: boolean;
     for(let i=0; i<secondFourChars.length; i++) {
         if(!(secondFourChars.charAt(i).match(regex))) {
-            return returnValue = false;
+            returnValue = false;
+            return returnValue;
         }
         returnValue = true;
     }
